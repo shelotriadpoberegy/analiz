@@ -1,0 +1,959 @@
+
+### Цель исследования:
+
+Необходимо выявить определяющие популярность марки вина закономерности и попытаться выяснить, что можно предложить покупателям вина при выборе вина. Это позволит сделать ставку на потенциально популярный продукт и спланировать например рекламную кампанию для интернет-магазинов, осуществляющих продажи вина.
+
+Выполнение задачи предполагает:<br>
+<a href=#1>1.  Предобработку данных</a><br>
+<a href=#2>2.  Исследовательский анализ данных</a><br>
+<a href=#3>3.  Составление портрета пользователя.</a><br>
+<a href=#4>4.  Исследование статистических показателей.</a><br>
+<a href=#5>5.  Проверку гипотез.</a><br>
+<a href=#6>6.  Выводы</a><br>
+
+Цель этого проекта — выявить, какие признаки больше всего влияют на рейтинг вина. Для анализа используется набор данных из Kaggle, крупнейшего в мире сообщества специалистов по данным и машинному обучению. Набор данных состоит из 13 признаков (2 числовых признака и 11 категориальных признаков).
+
+#### Столбцы данных
+
+- Страна - страна происхождения вина.
+- Описание — описание вкусового профиля вина.
+- Обозначение - виноградник, откуда берется виноград для вина.
+- Баллы - количество баллов на которое критик журнала Wine Enthusiast оценил вино по шкале от 1 до 100.
+- Цена - стоимость одной бутылки вина.
+- Провинция — провинция или штат, из которого произведено вино.
+- Регион 1 — зона виноделия в провинции или штате (например, долина Напа в Калифорнии).
+- Регион 2 — (не обязательно) более конкретный регион в винодельческой области (например, Резерфорд в долине Напа).
+- Разновидность — сорт винограда, из которого делают вино (например, Пино Нуар).
+- Винодельня — винодельня, производящая вино.
+
+### Шаг 1. Открытие файла с данными и изучение общей информации
+
+
+
+### Шаг 2. Подготовка данных
+
+* Заменить названия столбцов (привести к нижнему регистру).
+* Преобразовать данные в нужные типы. Описать, в каких столбцах заменили тип данных и почему.
+* Обработать пропуски при необходимости.
+* Объяснить, почему заполнили пропуски определённым образом или почему не стали это делать.
+* Описать причины, которые могли привести к пропускам.
+* Посчитать среднии цены для каждой страны.
+* Внести новый столбец "Континенты"
+continent = {<br>
+    'Italy':'Europe', <br>
+    'Portugal':'Europe', <br>
+    'US':'North America', <br>
+    'Spain':'Europe',<br>
+    'France':'Europe',<br>
+    'Germany':'Europe',<br>
+    'Argentina':'Latin America', <br>
+    'Chile':'Latin America', <br>
+    'Australia': 'Oceania', <br>
+    'Austria': 'Europe', <br>
+    'South Africa': 'Africa',<br>
+    'New Zealand': 'Oceania', <br>
+    'Israel': 'Asia', <br>
+    'Hungary':'Europe', <br>
+    'Greece':'Europe',<br>
+    'Romania':'Europe', <br>
+    'Mexico':'Latin America',<br>
+    'Canada':'North America',<br>
+    'Turkey': 'Asia',<br>
+    'Czech Republic': 'Europe',<br>
+    'Slovenia': 'Europe',<br>
+    'Luxembourg': 'Europe',<br>
+    'Croatia': 'Europe',<br>
+    'Georgia':'Europe', <br>
+    'Uruguay': 'Latin America',<br>
+    'England': 'Europe',<br>
+    'Lebanon': 'Asia', <br>
+    'Serbia': 'Europe', <br>
+    'Brazil': 'Latin America',<br> 
+    'Moldova': 'Europe', <br>
+    'Morocco':'Africa',<br>
+    'Peru':'Latin America',<br>
+    'India':'Asia', <br>
+    'Bulgaria':'Europe',<br>
+    'Cyprus': 'Europe',<br>
+    'Armenia':'Asia',<br>
+    'Switzerland':'Europe',<br>
+    'Bosnia and Herzegovina':'Europe',<br>
+    'Ukraine':'Europe',<br>
+    'Slovakia':'Europe', <br>
+    'Macedonia':'Europe',<br>
+    'China':'Asia',<br>
+    'Egypt':'Africa'<br>
+    }<br>
+
+### Шаг 3. Провести исследовательский анализ данных
+
+* Определить, какие сорта лидируют по рейтингам. Найти популярные сорта по региону.
+* Выбрать сорта с наибольшими ценами. Для каждого региона найдите среднюю цену вина.
+* Определить, популярные сорта вина в бюджетном сегменте.
+* Определить, какие сорта вина лидируют по рейтингам. 
+* Построить график «ящик с усами» по рейтингам в разбивке по странам, по сортам вина.
+* Выявить закономерность влияния на цену цвета и рейтинга. Построить диаграмму рассеяния и посчитать корреляцию. 
+
+
+### Шаг 4. Составить портрет потребителя каждого региона
+
+Определить для пользователя каждого континента :
+* Самые популярные сорта (топ-5). 
+* Влияет ли рейтинг на цены по регионам?
+
+### Шаг 5. Провести исследование статистических показателей
+
+* Выполнить подсчитать среднего количества, дисперсии и стандартного отклонения для цен на продукт различных регионов. Построить гистограммы. Описать распределения. 
+* Построить линейную регрессию зависимости между ценой продукта и его рейтингом.
+
+### Шаг 6. Проверка гипотез
+
+* H0: Средние пользовательские рейтинги красного и белого вина одинаковые.
+* H1:Средние пользовательские рейтинги красного и белого вина разные.
+
+
+* H0:Средние пользовательские рейтинги двух популярных сортов вина одинаковые.
+* H1:Средние пользовательские рейтинги двух популярных сортов вина разные.
+
+
+* H0:Средние пользовательские рейтинги двух континентов одинаковые.
+* H1:Средние пользовательские рейтинги двух континентов разные.
+
+Задать самостоятельно пороговое значение alpha.
+
+
+### Вывод
+
+#  <a name="1">1.Предобработка данных.
+
+Импортируем необходимые библиотеки
+"""
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import matplotlib.cm as cm
+
+import scipy.stats as st
+# импорт библиотеки warnings
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
+
+"""Открытие файла с данными и изучение общей информации.
+
+Загрузка данных
+"""
+
+df = pd.read_csv("wine_reviews.csv")
+df
+
+"""Столбец "region_2" достаточно неинформативен, судя по  заполненности значениями "NaN".
+
+С помощью метода .info() получаем детальную информацию о наборе  в столбцах.
+"""
+
+df.info()
+
+shape = df.shape
+print("Размер строк и столбцов (rows, columns):\t {}".format(shape))
+
+"""Количество значений в столбцах различается , например:\
+country      20000\
+designation  20000\
+price        18198\
+region_1     16543\
+region_2      8058 
+
+Это говорит о том, что в данных есть пустые значения.\
+Судя по типу данных float и int ,признаки "points" и "price" числовые.
+
+Столбец  "region_2" более других неинформативен по сравнению с другими столбцами, а также  при визуальной оценке их заполненности значениями "NaN". Удалим неактуальный столбец "region_2" .
+"""
+
+df = df.drop(columns = ["region_2"])
+
+""" С помощью библиотеки  из matplotlib построим визуализацию данных."""
+
+colours = ['#993366', '#FFFF00']
+sns.heatmap(df.isnull(), cmap=sns.color_palette(colours))
+# Decorations
+plt.title('Матрица пропущенных значений набора данных', fontsize=14)
+plt.xticks(fontsize=12)
+plt.yticks(fontsize=12)
+plt.figtext(0.5, -0.2, "Рисунок 1. - Матрица пропущенных значений набора данных")
+plt.show()
+
+"""Видны  пропущенные значения в столбцах\
+ "price",\
+ "region_1"\
+ "designation".
+
+Работа с пропусками в столбцах.\
+Применим в коде\
+1)isnull ().для нахождение нулевых значений \
+2)sum() для определения суммы значений вдоль столбцов в фрейме данных\
+3)sort_values для сортировки DataFrame на основе его значений в строках или столбцах\
+4)pd.concat для принятия списка однородно типизированных объектов и объединяет их с некоторой настраиваемой обработкой “что делать с другими осями"
+"""
+
+MissingValue = df.isnull().sum().sort_values(ascending = False)
+Percent = (df.isnull().sum()/df.isnull().count()*100).sort_values(ascending = False)
+MissingData = pd.concat([MissingValue, Percent], axis=1, keys=['Пропущенные значения', 'Процент'])
+MissingData
+
+"""В показателях "price" , "region_1" , "designation"  пропущены значения.
+
+Оценим количество отстутствующих значений в показателе "price" с намерением принять решение о возможности очистить данные с намерением получить более истинную степень результата проводимого анализа.
+"""
+
+total_records = len(df)
+missing_prices = df["price"].isnull().sum()
+missing_ratio = 100 - ((missing_prices / total_records) * 100)
+print("missing_prices: {}".format(missing_prices)+ "\n" +
+      "Total records: {}".format(total_records) + "\n" + 
+      "Percentage remaining: {:.2f}%".format(missing_ratio))
+
+"""Проведение анализа возможно при 90,99% значений в показателе "price".
+
+"""
+
+df.head()
+
+"""Удалим нечисловые значения в показателе "price".\
+Применим в коде  методы Pandas\
+1)dropna() для удаления в этом случае в наборе данных,оставим только целочисленные рабочие значения (int)\
+2) метод count() для возвращения  числа появлений в строке конкретного значения.
+"""
+
+df = df.dropna(axis='index', how='any', subset=['price'])
+df.count()
+
+""" Посчитаем общее количество пропущенных значений в каждом столбце DataFrame:"""
+
+print(df.isnull().sum())
+
+"""Показатели в "region_1", "designation" оставим.
+
+Дополним базу данными.\
+1)Применяем в коде метод создания множества, как удобный для создания коллекции   значений.\
+2)Применяем функцию map для работы с составным типом данных.
+"""
+
+#2)
+continent = {
+'Italy':'Europe',
+'Portugal':'Europe',
+'US':'North America',
+'Spain':'Europe',
+'France':'Europe',
+'Germany':'Europe',
+'Argentina':'Latin America',
+'Chile':'Latin America',
+'Australia': 'Oceania',
+'Austria': 'Europe',
+'South Africa': 'Africa',
+'New Zealand': 'Oceania',
+'Israel': 'Asia',
+'Hungary':'Europe',
+'Greece':'Europe',
+'Romania':'Europe',
+'Mexico':'Latin America',
+'Canada':'North America',
+'Turkey': 'Asia',
+'Czech Republic': 'Europe',
+'Slovenia': 'Europe',
+'Luxembourg': 'Europe',
+'Croatia': 'Europe',
+'Georgia':'Europe',
+'Uruguay': 'Latin America',
+'England': 'Europe',
+'Lebanon': 'Asia',
+'Serbia': 'Europe',
+'Brazil': 'Latin America',
+'Moldova': 'Europe',
+'Morocco':'Africa',
+'Peru':'Latin America',
+'India':'Asia',
+'Bulgaria':'Europe',
+'Cyprus': 'Europe',
+'Armenia':'Asia',
+'Switzerland':'Europe',
+'Bosnia and Herzegovina':'Europe',
+'Ukraine':'Europe',
+'Slovakia':'Europe',
+'Macedonia':'Europe',
+'China':'Asia',
+'Egypt':'Africa'
+}
+
+df['continent'] = df['country'].map(continent)
+df = df.dropna(axis='index', how='any', subset=['continent'])
+
+df.count()
+
+"""Проведем процедуру удаления дубликатов , т.к.
+важной частью анализа данных является анализ повторяющихся значений и их удаление / Применим метод Pandas duplicated()
+
+"""
+
+df=df.drop_duplicates(keep=False)
+df.head()
+
+"""Вывод: предобработка выполнена, создан Df для проведения анализа.
+
+#  <a name="2"> 2. Исследовательский анализ данных</a>
+
+Исследовательский анализ данных включает в себя выполнение следующих этапов:
+
+Найти популярные сорта по регионам.\
+Выбрать сорта вина с наибольшей стоимостью. Для каждого региона найти среднюю цену вина.\
+Определить популярные сорта вина в бюджетном сегменте.\
+Определить, какие сорта вина лидируют по рейтингам.\
+Построить график «ящик с усами» по рейтингам, выполнив категоризацию по странам, по сортам вина.\
+Выявить закономерность влияния рейтинга вина на его цену. Построить диаграмму рассеяния и посчитать корреляцию.
+
+Рассмотрим важные признаки датафрейма.
+
+Применим  функцию pandas.describe  для получения сводной описательной статистики для данного фрейма данных.
+"""
+
+df.describe()
+
+"""# country
+Применим  функцию pandas.describe  для получения сводной описательной статистики для данного фрейма данных\структуры с информацией по странам.
+"""
+
+df["country"].describe()
+
+"""(В наборе данных встречается 33 страны.Самая частовстречающаяся страна США она встречается 7304 раза.)
+
+Выведем ТОП 10 наиболее часто встречающихся стран в наборе данных
+"""
+
+df['country'].value_counts().to_frame().head(10)
+
+df_country = df['country'].value_counts().to_frame()
+df_country.reset_index(inplace=True)
+df_country.columns = ['country','counts']
+fig, ax = plt.subplots(figsize=(10,12));
+sns.barplot(data = df_country, x='country',y='counts',ax=ax).set_title('Количество образцов по странам')
+plt.figtext(0.2, 0, "Рисунок 2. - Распределение по странам ",fontsize=15)
+plt.xticks(rotation='vertical');
+
+"""# Сontinent"""
+
+df["continent"].describe()
+
+"""Лидеры Северная Америка"""
+
+df_country = df['continent'].value_counts().to_frame()
+df_country.reset_index(inplace=True)
+df_country.columns = ['continent','counts']
+fig, ax = plt.subplots(figsize=(16,10));
+sns.barplot(data = df_country, x='continent',y='counts',ax=ax).set_title('Количество образцов по континенту')
+plt.figtext(0.3, -0.1, "Рисунок 3. - Распределение по континентам ", fontsize=14)
+plt.xticks(rotation='vertical');
+
+"""# Designation
+Для получения данных о  влиянии обозначения, применим value_counts для возвращения объекта, содержащего уникальные значения из dataframe Pandas в отсортированном порядке от большего значения к меньшему в срезе из 10 пунктов.
+
+"""
+
+df.designation.value_counts()[:10]
+
+"""метод .describe()применим для описания данного столбца"""
+
+df["designation"].describe()
+
+"""Описание Reserve самое популярное (встречается 305 раз.)
+
+# Winery(винодельня)
+"""
+
+df.winery.describe()
+
+grapes = df[["winery", "variety"]].groupby(by = "winery").count()
+max_num = max(grapes["variety"])
+min_num = min(grapes["variety"])
+print('Минимальное',min_num)
+print('Максимальное',max_num)
+
+"""Количество виноделен с максимальным и минимальным числом сортов винограда.
+
+# Province
+"""
+
+df.province.describe()
+
+df.province.value_counts()[:10]
+
+"""Лидеры среди провинций California и Washington
+
+# Variety(разнообразие)
+метод .describe()применим для описания данного столбца
+"""
+
+df.variety.describe()
+
+"""Самая популярная марка вина " Pinot Noir"
+
+# Points
+метод .describe()применим для описания столбца "Points".
+"""
+
+df["points"].describe()
+
+"""Видны показатель минимального значения рейтинга 80.00, 25% - 86, 50% - 88, 75% - 90 .
+
+Построим столбчатую диаграмму показывающую количество сортов вин для каждого рейтинга
+"""
+
+fig, ax = plt.subplots(figsize=(20,10))
+plt.xlabel("Рейтинг",fontsize=15)
+plt.ylabel("Количество сортов вина",fontsize=15)
+plt.title("Количество сортов вина для каждого рейтинга",fontsize=20)
+df.groupby(['points']).count()['description'].plot(ax=ax, kind='bar')
+plt.figtext(0.3, 0, "Рисунок 4. - Гистограмма частоты признака Points ",fontsize=20)
+plt.show()
+
+"""Вычислим средний рейтин в наборе данных"""
+
+avg_rating = df["points"].mean()
+avg_rating
+
+"""Средний рейтинг составляет 87.90 баллов  выше среднего, что тождественно классификации  "хорошие вина" .
+
+Определим и создадим базу данных для бюджетных вин, тождественных классификации вин с рейтингом ниже среднего.
+Сформируем показатель "Good" с определением степени класификации вин.
+"""
+
+def GoodRating(row):
+  if row['points'] >= 88:
+     val = 1
+  else:
+     val = 0
+  return(val)
+df['Good'] = df.apply(GoodRating, axis=1)
+df.head()
+
+"""Создана база данных по бюджетным винам.
+
+"""
+
+dd=df.loc[df['Good'] == 0]
+dd.head()
+
+"""Получим ТОП-5 средних оценок вин из бюджетных сортов винограда."""
+
+country_price = dd.groupby(['variety',]).mean()['points'].sort_values(ascending=False).to_frame()
+country_price.head()
+
+"""# Price
+
+ТОП 10 стран с самой высокой средней ценой вина
+"""
+
+df["price"].describe()
+
+"""ТОП 10 стран с самым высоким средним рейтингом вина"""
+
+country_price = df.groupby(['country',]).mean()['price'].sort_values(ascending=False).to_frame()
+country_price.head(10)
+
+country_price = df.groupby(['country',]).mean()['price'].sort_values(ascending=False)
+plt.figure(figsize=(10,10))
+sns.pointplot(x = country_price ,y = country_price.index, color='maroon', orient='h')
+plt.title('Средняя цена по стране',fontsize=15)
+plt.xlabel('price',fontsize=15);
+plt.ylabel('country',fontsize=15);
+plt.figtext(0.2,0 , "Рисунок 5. - Зависимость средней цены от страны", fontsize=15 );
+
+country_points = df.groupby(['country',]).mean()['points'].sort_values(ascending=False)
+plt.figure(figsize=(10,10))
+sns.pointplot(x = country_points ,y = country_points.index, color='maroon', orient='h')
+plt.title('Средний рейтинг по стране',fontsize=15);
+plt.xlabel('Points',fontsize=15);
+plt.ylabel('country',fontsize=15);
+plt.figtext(0.2,0 , "Рисунок 6. - Зависимость рейтинга от страны", fontsize=15);
+
+"""Характеристики рейтинга по континентам(в расчет взяты страны с упоминанием в базе данных более 500 раз)"""
+
+country= df.groupby('continent').agg({'points': ['mean','median', 'var','std']})
+country['Counts'] =df['continent'].value_counts()
+country_500 = country[country['Counts']>500]
+country_500
+
+"""Характеристики рейтинга по странам (в расчет взяты страны с упоминанием в базе данных более 500 раз)"""
+
+country= df.groupby('country').agg({'points': ['mean','median', 'var','std']})
+country['Counts'] =df['country'].value_counts()
+country_1000 = country[country['Counts']>500]
+country_1000
+
+"""ТОП-10 вин с самым высоким рейтингом"""
+
+country_points = df.groupby(['variety',]).max()['points'].sort_values(ascending=False).to_frame()
+country_points.head(10)
+
+"""ТОП-10 провинций с самым высоким рейтингом"""
+
+country_points = df.groupby(['province',]).max()['points'].sort_values(ascending=False).to_frame()
+country_points.head(10)
+
+"""ТОП-5 самых дорогих вин"""
+
+df.nlargest(5,'price')
+
+# Выберем сорта с наибольшей стоимостью.
+max_price = df.groupby(['variety',]).max()['price'].sort_values(ascending=False)
+max_price.head(10)
+
+max_price = df.groupby(['country',]).max()['price'].sort_values(ascending=False).to_frame()
+max_price.head(5)
+
+"""Минимальная цена вина по странам. ТОП 5 стран."""
+
+min_price = df.groupby(['country',]).min()['price'].sort_values(ascending=False).to_frame()
+min_price.tail(5)
+
+top_country_wines = df.country.value_counts().head(10)
+top_country_wines
+
+fig = plt.figure(figsize=(20,10))
+points_top_country_wines = df[df.country.isin(top_country_wines.index)]
+x = points_top_country_wines.country
+y = points_top_country_wines.points
+sns.boxplot(x,y)
+plt.xlabel('сountry', fontsize=20)
+plt.ylabel('Points', fontsize=20)
+plt.title('Распределение рейтинга вина в топ-10 перечисленных стран',fontsize=20)
+plt.figtext(0.3, 0, "Рисунок 8. ТОП 10 стран по рейтингу вина",fontsize=20 );
+
+df.groupby('price').mean()['points']
+
+"""Расширим базу данных для анализа влияния цвета вина на его популярность."""
+
+color = {
+"Chardonnay": "white",
+"Pinot Noir": "red",
+"Cabernet Sauvignon": "red",
+"Red Blend": "red",
+"Bordeaux-style Red Blend": "red",
+"Sauvignon Blanc": "white",
+"Syrah": "red",
+"Riesling": "white",
+"Merlot": "red",
+"Zinfandel": "red",
+"Sangiovese": "red",
+"Malbec": "red",
+"White Blend": "white",
+"Rosé": "other",
+"Tempranillo": "red",
+"Nebbiolo": "red",
+"Portuguese Red": "red",
+"Sparkling Blend": "other",
+"Shiraz": "red",
+"Corvina, Rondinella, Molinara": "red",
+"Rhône-style Red Blend": "red",
+"Barbera": "red",
+"Pinot Gris": "white",
+"Viognier": "white",
+"Bordeaux-style White Blend": "white",
+"Champagne Blend": "other",
+"Port": "red",
+"Grüner Veltliner": "white",
+"Gewürztraminer": "white",
+"Portuguese White": "white",
+"Petite Sirah": "red",
+"Carmenère": "red"
+}
+
+df['color'] = df['variety'].map(color)
+df = df.dropna(axis='index', how='any', subset=['color'])
+
+df.head()
+
+# Построим диаграмму рассеивания и посчитаем корреляцию
+fig = plt.figure(figsize=(20,15))
+xx = np.log(df.price)
+yy = df.points
+plt.scatter(xx,yy)
+plt.xlabel('price', fontsize=20)
+plt.ylabel('Points', fontsize=20)
+plt.title('Корелляция между points и price',fontsize=20)
+plt.figtext(0.3, 0, "Рисунок 9. - График корелляции между points и price",fontsize=20);
+
+"""Вывод по этапу "Исследовательский анализ данных": самая частая страна США она встречается 7340  раза. В топ-5 помимо США входят:Франция, Италия, Чили, Испания.
+
+В разрезе континентов безусловное первенство у Северной Америки 
+
+Среди самых часто встречающихся провинций замечены Калифорния и Вашингтон. Скорее это связано с высокой концентрацией вин из США в базе данных.
+
+Основное количество сортов вин имеют рейтинг от 84 до 91. Соответственно средний рейтинг - 87..
+
+Лидером по популярности является вино " Pinot Noir".
+
+Среди бюджетных сортов вин наибольший рейтинги имеют Grüner Veltliner и Nebbiolo.
+
+Наиболее дорогие вина производятся в Европе, таких странах как: Турция, Франция, Италия. Точно так же, Европе принадлежат и наиболее рейтинговые вина. Самый дорогой сорт Bordeaux-style по цене 2300.0
+
+Самую дорогую бутылку вина можно приобрести во Франции (самый дорогой сорт Bordeaux-style по цене 2300.0), а самую дешевую в Австралии по цене 550.0.
+
+Между ценой и ретингом вина наблюдается существенная корелляция.
+
+#  <a name="4">3. Составление структуры развития рынка вина регионов
+В рамках составления структуры развития рынка вина в регионах необходимо определить:
+
+Самые популярные сорта (топ-5).\
+# Влияет ли рейтинг на цены по регионам?
+"""
+
+# Отсортируем и получим самый популярный сорт вина
+sorted_dd = dd.sort_values(by='variety', ascending=False).head() 
+sorted_dd.head()
+
+"""Определим вина какой области (province) получают наилучший рейтинг?\
+
+Визуализируем зависимость рейтинга вина от цены в Топ-5 странах:
+"""
+
+fig, ax = plt.subplots(figsize=(20,10))
+plt.xlabel("Страна, марка вина",fontsize=20)
+plt.ylabel("Количество упоминаний",fontsize=20)
+plt.title("Количество вина для страны ТОП-5",fontsize=20)
+sorted_dd.plot(ax=ax, kind='bar')
+plt.figtext(0.3, -0.2, "Рисунок 10. - Гистограмма самых популярных вин по каждой стране ТОП")
+plt.xlabel("Страна, сорт вина",fontsize=20)
+plt.ylabel("Количество упоминаний",fontsize=20)
+plt.show()
+
+df_US = df[df['country'] == 'US']
+df_US.head()
+
+fig = plt.figure(figsize=(10,5))
+plt.title('Распределение цены к рейтингу в США',fontsize=15)
+a = df_US[df.price <= 150][df.points <100]
+plt.figtext(0.3, 0, "Рисунок 11. Зависимость рейтинга от цены",fontsize=15 );
+sns.boxplot(x = 'points', y = 'price', data = a)
+
+df_Italy = df[df['country'] == 'Italy']
+df_Italy.head()
+
+fig = plt.figure(figsize=(10,5))
+plt.title('Распределение цены к рейтингу в Италии',fontsize=15)
+a = df_Italy[df.price <= 150][df.points <100]
+plt.figtext(0.3, 0, "Рисунок 12. Зависимость рейтинга от цены",fontsize=15 );
+sns.boxplot(x = 'points', y = 'price', data = a)
+
+df_France = df[df['country'] == 'France']
+df_France.head()
+
+fig = plt.figure(figsize=(10,5))
+plt.title('Распределение цены к рейтингу во Франции',fontsize=15)
+a = df_France[df.price <= 150][df.points <100]
+plt.figtext(0.3, 0, "Рисунок 13. Зависимость рейтинга от цены",fontsize=15 );
+sns.boxplot(x = 'points', y = 'price', data = a)
+
+df_Germany = df[df['country'] == 'Germany']
+df_Germany.head()
+
+fig = plt.figure(figsize=(10,5))
+plt.title('Распределение цены к рейтингу в Германии',fontsize=15)
+a = df_Germany[df.price <= 150][df.points <100]
+plt.figtext(0.3, 0, "Рисунок 14. Зависимость рейтинга от цены",fontsize=15 );
+sns.boxplot(x = 'points', y = 'price', data = a)
+
+df_Spain = df[df['country'] == 'Spain']
+df_Spain.head()
+
+fig = plt.figure(figsize=(10,5))
+plt.title('Распределение цены к рейтингу в Испании',fontsize=15)
+a = df_Spain[df.price <= 150][df.points <100]
+plt.figtext(0.3, 0, "Рисунок 15. Зависимость рейтинга от цены",fontsize=15 );
+sns.boxplot(x = 'points', y = 'price', data = a)
+
+"""Вывод: Определили самые популярные сорта вин в каждой из стран\: США - Pinot Noir,  Италия - Red Blend,  Франция - Chardonnay,  Германия - Riesling, Испания - Tempranillo
+
+В независимости от региона наблюдается визуально различимая корреляция между ценой вина и его рейтингом. Чем выше рейтинг, тем выше цена.
+
+#  <a name="4"> 4. Исследование статистических показателей зависимости цены вина от рейтинга в регионе.</a>
+
+В рамках исследования статистических показателей необходимо построить линейную регрессию зависимости между ценой продукта и его рейтингом.
+
+Применим коэффициент Scipy статистики pearsonr, чтобы найти корреляцию между двумя наборами данных.
+"""
+
+from scipy.stats.stats import pearsonr
+y = pearsonr(df["price"],df["points"])
+y
+
+"""Применим метод shape() для извлечения размеров объектов типа Pandas и NumPy в python., обьект, возвращаемый методом shape(), представляет собой фактическое количество элементов соответствующее значению размера объекта."""
+
+X = df[['price']]
+X.shape
+
+X = df[['price']].copy()
+y = df[['points']].copy()
+
+""" Sklearn train_test_split для разделения набора данных на обучающие и тестовые данные"""
+
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+"""Определим с помощью регрессии как значение зависит от других данных для прогнозирования ответа . С помощью пакета scikit-learn реализуем регрессию 1) Первым шагом импортируем пакет NumPy и класс LinearRegression из sklearn.linear_model"""
+
+from sklearn.linear_model import LinearRegression
+model = LinearRegression()
+model.fit(X_train, y_train)
+y_predicted = model.predict(X_test)
+w = model.coef_
+b = model.intercept_
+print(w, b)
+
+"""Построим график зависимости цены от рейтинга и модель линейной регрессии"""
+
+plt.figure (figsize=(10, 7))
+plt.scatter(X, y, label='real')
+plt.scatter(X_train, y_train, label='train')
+plt.scatter(X_test, y_test, label='test')
+plt.plot(X_test.squeeze(), y_predicted.squeeze(), label='predicted')
+plt.legend()
+plt.ylim(80,102)
+plt.title("Зависимость цены от рейтинга",fontsize=15)
+plt.ylabel('points',fontsize=10);
+plt.xlabel('price',fontsize=10);
+plt.figtext(0.2, 0, "Рисунок 16. Линейная корреляция цены от качества",fontsize=15);
+plt.show()
+
+"""Видно, что цены на вина с одинаковой оценкой все еще сильно различаются, особенно разница в цене на вина с более высокими оценками. Также из рисунка видно, что есть несколько выбросов, большинство из них очень дорогие!
+
+Выполним повторную выборку для значений log(price), посмотрим как изменится график
+"""
+
+X = np.log(df[['price']].copy())
+y = df[['points']].copy()
+
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+"""Создадим модель линейной регрессии"""
+
+from sklearn.linear_model import LinearRegression
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+y_predicted = model.predict(X_test)
+w = model.coef_
+b = model.intercept_
+print(w, b)
+
+plt.figure(figsize=(10, 7))
+plt.scatter(X, y, label='real')
+plt.scatter(X_train, y_train, label='train')
+plt.scatter(X_test, y_test, label='test')
+plt.plot(X_test.squeeze(), y_predicted.squeeze(), label='predicted')
+plt.title("Зависимость цены от рейтинга",fontsize=15)
+plt.ylabel('points',fontsize=10);
+plt.xlabel('price',fontsize=10);
+plt.figtext(0.2, -0, "Рисунок 17. Линейная корреляция Log(цены) от качества вина",fontsize=15);
+plt.legend()
+plt.show()
+
+"""Вывод по этапу "Исследование статистических показателей зависимости цены вина от рейтинга в регионе":\
+ существует корреляция между точками, данными по вину и логорифмом цены вина. Линейная комбинация переменных может дать прямую линию, но эта линия не соответствует данным. Но тенденция заключается в том, что чем больше рейтинг, тем больше цена вина.
+
+#  <a name="5">5. Проверка гипотез </a>
+
+На основе проведенном анализе, были выявлены некоторые закономерности. Это позволяет сформулировать следующие гипотезы:
+
+H0: Средние пользовательские рейтинги красного и белого вина одинаковые.
+
+H1:Средние пользовательские рейтинги красного и белого вина разные.
+
+H0:Средние цены двух популярных сортов вина одинаковые.
+
+H1:Средние цены двух популярных сортов вина разные.
+
+Пороговое значение alpha - необходимо задать самостоятельно.
+
+Проверим первую гипотезу
+
+H0: Средние пользовательские рейтинги красного и белого вина одинаковые
+
+H1: Средние пользовательские рейтинги красного и белого вина разные
+
+Определяем рейтинги вина в зависимости от его цвета
+"""
+
+color_price = df.groupby(['color']).mean()['points'].sort_values(ascending=False).to_frame()
+color_price
+
+red = color_price.points[0]
+red
+
+white = color_price.points[2]
+white
+
+if red == white:
+ print('True')
+else:
+ print('False')
+
+"""Выявлен средний пользовательский рейтинг  вина красного цвета отличный от среднего пользовательского рейтинга вина белого цвета."""
+
+red = df[df.color == 'red']['points']
+white = df[df.color == 'white']['points']
+
+""" Определим  меру разброса данных вокруг среднего арифметического значения рейтигна двух цветов вин -  дисперсию двух массивов."""
+
+if np.var(red)==np.var(white ): #Выясним равны ли дисперсии двух массивов?
+ print('True')
+else:
+ print('False')
+
+sns.distplot(red, color='b') # distplot одновременно показывает гистограмму и график плотности распределения
+plt.title("Статистическая гипотеза",fontsize=15) # pit метод для добавления заголовка к диаграмме и к графику
+plt.ylabel('частота',fontsize=10);# plt.ylabel - подпись оси y, 
+plt.xlabel('points',fontsize=10);# plt.ylabel - подпись оси y, 
+plt.figtext(0.2, -0.1, "Рисунок 31. Гистограмма и график плотности распределения оценок красного вина")# Figtext используется для добавления текста к фигуре в любом месте на ней
+plt.show()#использоваться только один раз за сеанс Python и чаще всего встречается в самом конце скрипта. 
+sns.distplot(white , color='y')
+plt.title("Статистическая гипотеза",fontsize=15)
+plt.ylabel('частота',fontsize=10);
+plt.xlabel('points',fontsize=10);
+plt.figtext(0.2, -0.1, "Рисунок 32. Гистограмма и график плотности распределения оценок белого вина")
+plt.show()
+plt.show()
+
+"""Проведем проверку статистической значимости , чтобы установить порог, за пределами которого мы решаем, что наблюдаемые данные больше не поддерживают нулевую гипотезу. Если результирующее p-значение теста Левена меньше некоторого уровня значимости (обычно 0.05), полученные различия в выборочных дисперсиях вряд ли имели место на основе случайной выборки из популяции с равными дисперсиями. Таким образом, нулевая гипотеза равных дисперсий отвергается """
+
+alpha = .05 # критический уровень статистической значимости
+ # если p-значение меньше альфа, мы отвергаем гипотезу
+from scipy import stats as st
+import scipy
+results = scipy.stats.ttest_ind(red, white, equal_var = False)# Определяя equal_var = False, мы указываем, считаем ли мы дисперсию наших двух выборок равной или нет
+print('p-значение:', results.pvalue)
+if (results.pvalue < alpha):
+ print("Отклоняем нулевую гипотезу")
+else:
+ print("Не получилось отклонить нулевую гипотезу")
+
+"""Отклоняем гипотезу, что cредние пользовательские рейтинги красного и белого вина одинаковые , тк p-значение =  1.884404141077982e-11 меньше альфа = .05
+
+Проверим вторую гипотезу
+
+H0:Средние цены двух популярных сортов вина одинаковые.
+
+H1:Средние цены двух популярных сортов вина разные.
+"""
+
+top_10 = df.variety.value_counts().head() # Определим top_5 марок вин, общее количество
+top_10
+
+print('Средняя цена вина Pinot Noir равена: ',df[df['variety']=='Pinot Noir']['price'].mean())
+print('Средняя цена вина Chardonnay равена: ',df[df['variety']=='Chardonnay']['price'].mean())
+
+Pinot = df[df.variety == 'Pinot Noir']['price']
+Chard = df[df.variety == 'Chardonnay']['price']
+
+if np.var(Pinot) == np.var(Chard):
+ print('True')
+else:
+ print('False')
+
+sns.distplot(Pinot, color='b')
+plt.title("Статистическая гипотеза",fontsize=15);
+plt.ylabel('частота',fontsize=10);
+plt.xlabel('price',fontsize=10);
+plt.figtext(0.1, -0.1, "Рисунок 33. Гистограмма и график плотности распределения цены Pinot Noir")
+plt.show()
+plt.show()
+sns.distplot(Chard , color='y')
+plt.title("Статистическая гипотеза",fontsize=15)
+plt.ylabel('частота',fontsize=10);
+plt.xlabel('price',fontsize=10);
+plt.figtext(0.1, -0.1, "Рисунок 34. Гистограмма и график плотности распределения цены Chardonnay")
+plt.show()
+
+alpha = .05
+from scipy import stats as st
+import scipy
+results = scipy.stats.ttest_ind(Pinot, Chard, equal_var = False)
+print('p-значение:', results.pvalue)
+if (results.pvalue < alpha):
+ print("Отклоняем нулевую гипотезу")
+else:
+ print("Не получилось отклонить нулевую гипотезу")
+
+"""Проверим третью гипотезу
+
+H0:Средние пользовательские рейтинги двух континентов одинаковые.
+
+H1:Средние пользовательские рейтинги двух континентов разные.
+"""
+
+points_continent = df.groupby(['continent']).mean()['points'].sort_values(ascending=False).to_frame()
+points_continent
+
+print('Средний пользовательский рейтинг Europы равен: ', points_continent.points[0])
+print('Средний пользовательский рейтинг North America равен: ', points_continent.points[1])
+
+Europe = df[df.continent == 'Europe']['points']
+North = df[df.continent == 'North America']['points']
+
+if np.var(Europe) == np.var(North):
+ print('True')
+else:
+ print('False')
+
+sns.distplot(Europe, color='b')
+plt.title("Статистическая гипотеза",fontsize=15)
+plt.ylabel('частота',fontsize=10);
+plt.xlabel('points',fontsize=10);
+plt.figtext(0.2, -0.1, "Рисунок 35. Гистограмма и график плотности распределения оценок Европы")
+plt.show()
+sns.distplot(North , color='y')
+plt.title("Статистическая гипотеза",fontsize=15)
+plt.ylabel('частота',fontsize=10);
+plt.xlabel('points',fontsize=10);
+plt.figtext(0.2, -0.1, "Рисунок 36. Гистограмма и график плотности распределения оценок Северной Америки")
+plt.show()
+
+alpha = .05
+from scipy import stats as st
+import scipy
+results = scipy.stats.ttest_ind(Pinot, Chard, equal_var = False)
+print('p-значение:', results.pvalue)
+if (results.pvalue < alpha):
+ print("Отклоняем нулевую гипотезу")
+else:
+ print("Не получилось отклонить нулевую гипотезу")
+
+"""Проверив три гипотезы сделали вывод:
+
+Средние пользовательские рейтинги красного и белого вина разные.
+Средние цены двух популярных сортов вина Pinot Noir и Chardonnay разные.
+Средние пользовательские рейтинги двух континентов разные.
+
+# <a name="6">6. Выводы</a>
+
+ВЫВОДЫ по результатам аналитического исследования:
+
+В наборе данных представленных в этом исследовании существует большой "страновой перекос". Практически половина базы представлена винами из США, что скорее всего не соответствует действительной картине на рынке.
+
+В наборе данных встречается 34 страны.Самая частая США она встречается 7340 раз. В топ-5 помимо США входят:Франция, Италия, Чили, Испания. В разрезе континентов безусловное первенство у Северной Америки и Европы. Среди самых часто встречающихся провинций замечены Калифорния и Вашингтон, опять же, это связано с высокой концентрацией вин из США в базе данных.
+
+Основное количество сортов вин имеют рейтинг от 84 до 91. Соответственно средний рейтинг - 87,89. Среди бюджетных сортов вин наибольший рейтинги имеют сорта Grüner Veltliner и Nebbiolo. Наиболее дорогие вина производятся в Европе, таких странах как: Турция, Франция, Италия. Точно так же, Европе принадлежат и наиболее рейтинговые вина.
+
+Самую дорогую бутылку вина можно приобрести во Франции по цене 2300 доллоров США при этом самую дешевую бутылку вина можно купить в Австралии всего за 550 долларов.
+
+Между ценой и ретингом вина наблюдается существенная корелляция. Чем выше рейтинг, тем выше цена. Замечено, что при приближении к максимальным рейтингам цена имеет тенденцию к ускорению в росте. При чем для самых ретинговых вин заметны ощутимые выбросы в сторону роста цены.
+
+Самым популярным сортом вина в каждой из ТОП-5 стран является: США - Pinot Noir Италия - Red Blend Франция - Chardonnay Германия - Riesling Испания - Tempranillo
+
+Наблюдается визуально различимая корреляция между ценой вина и его рейтингом. В независимости от региона такая корелляция характерна для вина разных стран из ТОП-5.
+"""
+
+
+
